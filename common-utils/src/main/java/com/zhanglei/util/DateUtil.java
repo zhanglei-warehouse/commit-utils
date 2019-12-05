@@ -53,7 +53,6 @@ public class DateUtil {
 		try {
 			date = simpleDateFormat.parse(birthDate);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return getAge(date);
@@ -104,7 +103,7 @@ public class DateUtil {
 		System.out.println(age);*/
 		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
-		Date date1 = simpleDateFormat.parse("2019-12-04");
+		Date date1 = simpleDateFormat.parse("2021-09-09");
 		
 		int i = getDayNum(date1);
 		System.out.println(i);
