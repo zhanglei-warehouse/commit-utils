@@ -59,7 +59,34 @@ public class DateUtil {
 		return getAge(date);
 	}
 	
+	/**
+	 * 
+	* @Title: getDayNum 
+	* @Description: 获取两个时间点间的天数
+	* @return int    返回类型 
+	* @throws
+	 */
+	public static int getDayNum(Date date1,Date date2){
+		//计算一天有多少毫秒
+		Long dayTime = 1000*60*60*24L;
+		//获取两个日期的毫秒值
+		long startTime = date1.getTime();
+		long endTime   = date2.getTime();
+		double dayNum = Math.ceil( Math.abs((startTime-endTime)/(dayTime*1.0)));
+		
+		return (int)dayNum;
+	}
 	
+	/** 
+	* @Title: getDayNum 
+	* @Description: 相比较今天差几天 
+	* @return int    返回类型 
+	* @throws 
+	*/
+	public static int getDayNum(Date date){
+		Date date1 = new Date();
+		return getDayNum(date1, date);
+	}
 	
 	
 	
@@ -73,7 +100,13 @@ public class DateUtil {
 		int age = getAge(date);
 		System.out.println(age);*/
 		
-		int age = getAge("1999-06-14");
-		System.out.println(age);
+		/*int age = getAge("1999-06-14");
+		System.out.println(age);*/
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
+		Date date1 = simpleDateFormat.parse("2019-12-04");
+		
+		int i = getDayNum(date1);
+		System.out.println(i);
 	}
 }
