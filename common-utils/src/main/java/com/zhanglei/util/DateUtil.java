@@ -13,6 +13,9 @@ import java.util.Date;
 * 日期工具类
 */
 public class DateUtil {
+	@SuppressWarnings("unused")
+	private static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	/**
 	 * 
 	* @Title: getAge 
@@ -89,25 +92,86 @@ public class DateUtil {
 		return getDayNum(date1, date);
 	}
 	
+	/** 
+	* @Title: isToday 
+	* @Description:验证日期是否为今天 
+	* @return boolean    返回类型 
+	* @throws 
+	*/
+	public static boolean isToday(Date theDate){
+		
+		Date nowDate = new Date();
+		String nowDateStr = dateFormat.format(nowDate);
+		String theDateStr = dateFormat.format(theDate);
+		return nowDateStr.equals(theDateStr);
+	}
+	
+	/** 
+	* @Title: isToday 
+	* @Description: 验证日期是否为今天 
+	* @return boolean    返回类型 
+	* @throws 
+	*/
+	public static boolean isToday(String theDateStr){
+		try {
+			Date theDate = dateFormat.parse(theDateStr);
+			return isToday(theDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	/** 
+	* @Title: isInWeek 
+	* @Description: 判定日期是否在本周 
+	* @return boolean    返回类型 
+	* @throws 
+	*/
+	public static boolean isInWeek(Date theDate){
+		Calendar calendar = Calendar.getInstance();
+		int nowYear = calendar.get(Calendar.YEAR);
+		int nowWeek = calendar.get(Calendar.WEEK_OF_YEAR);
+		calendar.setTime(theDate);
+		int theYear = calendar.get(Calendar.YEAR);
+		int theWeek = calendar.get(Calendar.WEEK_OF_YEAR);
+		return nowYear==theYear && nowWeek==theWeek;
+	}
 	
 	
+	/** 
+	* @Title: getFirstDateInMonth 
+	* @Description: 获得这月 开始的时间
+	* @return Date    返回类型 
+	* @throws 
+	*/
+	public static Date getFirstDateInMonth(Date theDate){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(theDate);
+		calendar.set(Calendar.DAY_OF_MONTH,1);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		return calendar.getTime();
+	}
 	
 	
-	
-	public static void main(String[] args) throws ParseException {
-		/*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	/*public static void main(String[] args) throws ParseException {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = simpleDateFormat.parse("1999-06-14");
 		
 		int age = getAge(date);
-		System.out.println(age);*/
+		System.out.println(age);
 		
-		/*int age = getAge("1999-06-14");
-		System.out.println(age);*/
+		int age = getAge("1999-06-14");
+		System.out.println(age);
 		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
 		Date date1 = simpleDateFormat.parse("2021-09-09");
 		
 		int i = getDayNum(date1);
 		System.out.println(i);
-	}
+	}*/
 }
