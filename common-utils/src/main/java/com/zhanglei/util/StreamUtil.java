@@ -1,7 +1,10 @@
 package com.zhanglei.util;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 
 /** 
@@ -64,5 +67,41 @@ public class StreamUtil {
 	*/
 	public static String readTextFile(String fileFullName){
 		return readTextFile(new File(fileFullName));
+	}
+	
+	/** 
+	* @Title: writeTextFile 
+	* @Description: 续写文件内容
+	* @return void    返回类型 
+	* @throws 
+	*/
+	public static void writeTextFile(String content,File file,boolean append) {
+		BufferedWriter writer = null;
+		try {
+			//判断写文件的文件夹是否存在
+			String parent = file.getParent();
+			File parentFile = new File(parent);
+			if(!parentFile.exists()) {
+				parentFile.mkdirs();
+			}
+			//写文件
+			writer = new BufferedWriter(new FileWriter(file,append));
+			writer.write(content);
+			writer.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			closeAll(writer);
+		}
+	}
+	
+	/** 
+	* @Title: writeTextFile 
+	* @Description: 续写文件内容
+	* @return void    返回类型 
+	* @throws 
+	*/
+	public static void writeTextFile(String content,String fileFullName,boolean append) {
+		writeTextFile(content,new File(fileFullName), append);
 	}
 }

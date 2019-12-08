@@ -14,7 +14,7 @@ import java.util.Date;
 */
 public class DateUtil {
 	@SuppressWarnings("unused")
-	private static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	private static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	/**
 	 * 
@@ -157,21 +157,37 @@ public class DateUtil {
 		return calendar.getTime();
 	}
 	
+	/** 
+	* @Title: getLastDateInMonth 
+	* @Description: 获得日期的最后一天
+	* @return Date    返回类型 
+	* @throws 
+	*/
+	public static Date getLastDateInMonth(Date theDate) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(theDate);
+		c.add(Calendar.MONTH, 1);
+		Date firstDateInMonth = getFirstDateInMonth(c.getTime());
+		c.setTime(firstDateInMonth);
+		c.add(Calendar.SECOND, -1);
+		return c.getTime();
+	}
 	
-	/*public static void main(String[] args) throws ParseException {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = simpleDateFormat.parse("1999-06-14");
-		
-		int age = getAge(date);
-		System.out.println(age);
-		
-		int age = getAge("1999-06-14");
-		System.out.println(age);
-		
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
-		Date date1 = simpleDateFormat.parse("2021-09-09");
-		
-		int i = getDayNum(date1);
-		System.out.println(i);
-	}*/
+	/** 
+	* @Title: compareTime 
+	* @Description: 两个时间比较 相等返回0 大于返回1 小于返回-1 
+	* @return int    返回类型 
+	* @throws 
+	*/
+	public static int compareTime(Date date1,Date date2) {
+		long time1 = date1.getTime();
+		long time2 = date2.getTime();
+		if(time1==time2) {
+			return 0;
+		}
+		if(time1>time2) {
+			return 1;
+		}
+		return -1;
+	}
 }
