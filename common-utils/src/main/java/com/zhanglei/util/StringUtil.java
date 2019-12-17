@@ -241,5 +241,31 @@ public class StringUtil {
 		String name2 = randomChineseString(RandomUtil.random(1, 2));
 		return name1 + name2;
 	}
+	/** 
+	* @Title: judgeTelephoneIsOk 
+	* @Description: 判断是否为手机号 
+	* @return boolean    返回类型 
+	* @throws 
+	*/
+	public static boolean judgeTelephoneIsOk(String src){
+		//TODO 实现代码
+		String phone = "1\\d{10}";
+		boolean b = Pattern.matches(phone, src);
+		return b;
+	}
+	
+	/** 
+	* @Title: isNumber 
+	* @Description: 判断字符串是否为数字 
+	* @return boolean    返回类型 
+	* @throws 
+	*/
+	public static boolean isNumber(String src){
+		//TODO 实现代码
+		String number = "\\d+";
+		boolean b = Pattern.matches(number, src);
+		return b;
+	}
+
 	
 }
