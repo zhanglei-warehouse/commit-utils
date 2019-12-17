@@ -17,6 +17,17 @@ public class DateUtil {
 	private static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	/**
+	 * @Title: format   
+	 * @Description: 时间格式化  
+	 * @param: @param theDate
+	 * @param: @return      
+	 * @return: String      
+	 * @throws
+	 */
+	public static String format(Date theDate) {
+		return dateFormat.format(theDate);
+	}
+	/**
 	 * 
 	* @Title: getAge 
 	* @Description: 根据生日计算年龄
