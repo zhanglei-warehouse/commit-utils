@@ -13,7 +13,6 @@ import java.util.Date;
 * 日期工具类
 */
 public class DateUtil {
-	@SuppressWarnings("unused")
 	public static SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	/**
