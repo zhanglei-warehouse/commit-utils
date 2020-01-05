@@ -90,9 +90,10 @@ public class FileUtil {
 		List<String> strList = new ArrayList<>();
 		try {
 			br = new BufferedReader(new FileReader(new File(pathname)));
-			do {
-				strList.add(br.readLine());
-			}while(br.read()!=-1);
+			String str = null;
+			while((str=br.readLine())!=null){
+				strList.add(str);
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return null;
@@ -154,5 +155,11 @@ public class FileUtil {
 	*/
 	public static String getFileSize(String fileFullName) {
 		return getFileSize(new File(fileFullName));
+	}
+	public static void main(String[] args) {
+		List<String> readTextFileOfList = readTextFileOfList("C:\\Users\\zhanglei\\Desktop\\第二周复习\\10zk2\\pom.xml");
+		for (String string : readTextFileOfList) {
+			System.out.println(string);
+		}
 	}
 }
