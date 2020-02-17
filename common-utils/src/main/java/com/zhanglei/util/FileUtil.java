@@ -1,12 +1,17 @@
 package com.zhanglei.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
 
 /** 
 * @author Name: zhanglei
@@ -15,6 +20,22 @@ import java.util.List;
 * 文件工具类
 */
 public class FileUtil {
+	/***
+	 * @Title: writeFile * @Description: 按照指定的编码把内容写入指定的文件中 * @param path * @param
+	 *         content * @param charset * @throws IOException * @return: void
+	 */
+	public static void writeFile(String path, String content, String charset) throws IOException {
+		// 创建写入的文件
+		File file = new File(path);
+		// 创建输出流对象
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charset));
+		bw.write(content);
+		bw.flush();
+		bw.close();
+
+	}
+	
+	
 	/** 
 	* @Title: getExtName 
 	* @Description: 获取文件的扩展名 
@@ -105,6 +126,29 @@ public class FileUtil {
 		}
 		return strList;
 	}
+	public static List<String> readFileUrl(String file){
+		File file2 = new File(file);
+		return readFileUrl(file2);
+	}
+	//读取文件夹中的文件路径
+	public static List<String> readFileUrl(File file) {
+		List<String> list = new ArrayList<String>();
+		if(file.isDirectory()) {
+			File[] listFiles = file.listFiles();
+			//循环获取文件路径
+			for (File file2 : listFiles) {
+				//使用文件路径读取文件
+				String readTextFileByLine = readTextFileByLine(file2.toString());
+				//截取文件名
+				String[] split = file2.toString().split("\\\\");
+				//添加到集合中
+				list.add(split[2]+"@@"+readTextFileByLine);
+			}
+		}
+		return list;
+		
+	}
+	
 	
 	/** 
 	* @Title: deleteFile 
@@ -162,4 +206,7 @@ public class FileUtil {
 			System.out.println(string);
 		}
 	}
+	//读取文件夹中内容 
+	
+	
 }
